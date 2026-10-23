@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools==84.2.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "zip-content-diff"
+version = "0.1.0"
+description = "Explain ZIP release differences with SHA-256 payload checks and metadata separation"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{name = "KanadeK"}]
+dependencies = []
+keywords = ["zip", "reproducible-builds", "diff", "wheel", "offline"]
+
+[project.scripts]
+zip-content-diff = "zip_content_diff.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.coverage.run]
+source = ["zip_content_diff"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 85
