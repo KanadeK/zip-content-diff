@@ -1,6 +1,6 @@
 # Local validation record
 
-Run date: 2026-10-23. Environment: Windows, Python 3.13.16. Version: 0.1.0 release candidate; public publication has not occurred.
+Run dates: 2026-10-23–24 (Asia/Shanghai). Environment: Windows, Python 3.13.16. Version: 0.1.0 release candidate; public publication has not occurred.
 
 - Unit/integration suite: **29 tests passed**.
 - Combined statement/branch coverage: **91.3%**.
