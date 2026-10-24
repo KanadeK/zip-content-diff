@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0 (release candidate)
+## 0.1.0 — 2026-10-24
 
 - Compare every member by exact name, kind, byte size and streamed SHA-256, with CRC checks.
 - Separate payload changes from timestamps, compression, attributes, comments and order.

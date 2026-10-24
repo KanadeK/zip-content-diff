@@ -33,3 +33,7 @@ branch = true
 [tool.coverage.report]
 show_missing = true
 fail_under = 85
+
+[project.urls]
+Repository = "https://github.com/KanadeK/zip-content-diff"
+Issues = "https://github.com/KanadeK/zip-content-diff/issues"

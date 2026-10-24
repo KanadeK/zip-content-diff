@@ -13,6 +13,8 @@ It works with ordinary ZIP files and ZIP-based wheels/JARs without extracting or
 Requires Python 3.11+. Runtime dependencies: none.
 
 ```console
+git clone https://github.com/KanadeK/zip-content-diff.git
+cd zip-content-diff
 python -m venv .venv
 ```
 
