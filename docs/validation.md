@@ -14,3 +14,7 @@ Commands are in CONTRIBUTING.md and scripts/verify_install.py. Tests use synthet
 Direct runtime/build requirements and the complete resolved local quality environment were checked with pip-audit 2.10.1; final scans found no known vulnerabilities. The prior setuptools 80.9.0 pin hit GHSA-h35f-9h28-mq5c and was replaced before shipping. Vulnerability databases change; this is a dated result, not a permanent guarantee.
 
 Extra review: 50 randomized archive pairs matched an independent member-byte oracle.
+
+The initial remote Windows/Python 3.11 run exposed a test that relied on a sub-clock-resolution
+wall-time budget. The timeout test now advances a controlled clock past the deadline during both
+archive reads and member reads, preserving the error assertions without depending on I/O speed.

@@ -11,6 +11,7 @@ import warnings
 import zipfile
 from dataclasses import replace
 from pathlib import Path
+from unittest.mock import patch
 
 from zip_content_diff.cli import main
 from zip_content_diff.core import ArchiveError, Limits, compare, inspect_archive
@@ -212,8 +213,17 @@ class ZipDiffTests(unittest.TestCase):
 
     def test_time_budget(self):
         self.write(self.left)
-        with self.assertRaisesRegex(ArchiveError, "time_budget_exceeded"):
-            inspect_archive(self.left, Limits(timeout_seconds=1e-12))
+        # Windows/Python 3.11 monotonic clocks can have coarse resolution. Advance
+        # a controlled clock beyond the budget instead of assuming tiny I/O takes
+        # a measurable amount of wall time. Exercise both raw and member reads.
+        for stage, ticks in (
+            ("archive read", [100.0, 101.0]),
+            ("member read", [100.0, 100.0, 100.0, 101.0]),
+        ):
+            with self.subTest(stage=stage):
+                with patch("zip_content_diff.core.time.monotonic", side_effect=ticks):
+                    with self.assertRaisesRegex(ArchiveError, "time_budget_exceeded"):
+                        inspect_archive(self.left, Limits(timeout_seconds=0.5))
 
     def test_invalid_limits(self):
         for name, value in (
